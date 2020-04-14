@@ -40,6 +40,7 @@ public class CheckActivity extends AppCompatActivity implements MidiDriver.OnMid
     private ArrayList<Float> pitches;
     private ArrayList<Integer> amplitudes;
     private int[][] population;
+    private int[][] population_backup;
     private int[][] adaptability;
     private int[][] parentPopulation;
     private int[][] childrenPopulation;
@@ -47,7 +48,7 @@ public class CheckActivity extends AppCompatActivity implements MidiDriver.OnMid
     private double status = 99.000001;
     private Handler h;
     private int[] successMelody = new int[60];
-
+    private Thread t;
     private MidiDriver midiDriver;
     private byte[] event;
     private int[] config;
@@ -71,8 +72,7 @@ public class CheckActivity extends AppCompatActivity implements MidiDriver.OnMid
     @SuppressLint("SetTextI18n")
     public void makeMusic(View view) throws InterruptedException {
         updateStatus();
-        Thread.sleep(2000);
-        Thread t = new Thread(new Runnable() {
+         t = new Thread(new Runnable() {
             public void run() {
                 runGeneticAlgorithm();
             }
@@ -84,6 +84,7 @@ public class CheckActivity extends AppCompatActivity implements MidiDriver.OnMid
         h.sendEmptyMessage(0);
         geneticAlgorithm = new GeneticAlgorithm(pitches.toArray(new Float[pitches.size()]), amplitudes.toArray(new Integer[amplitudes.size()]));
         population = geneticAlgorithm.createPopulation();
+        population_backup = population;
         h.sendEmptyMessage(10);
         sleep(3000);
         adaptability = geneticAlgorithm.identificationOfFitness(population);
@@ -123,13 +124,13 @@ public class CheckActivity extends AppCompatActivity implements MidiDriver.OnMid
             if (geneticAlgorithm.triggerSaccessIndividual(adaptability[1]) > 40){
                 population = geneticAlgorithm.Mutation(population, false);
             }
-            sleep(50);
             h.sendEmptyMessage(999);
         }
         h.sendEmptyMessage(100);
         for (int i = 0; i < 60; i++){
             successMelody[i] = population[i][adaptability[0][99]];
         }
+        t.interrupt();
     }
 
     private void sleep(int time) {
@@ -179,7 +180,7 @@ public class CheckActivity extends AppCompatActivity implements MidiDriver.OnMid
                         mes = "Ухты! Кажется мы готовы представить вам творение искусства";
                         break;
                     case (999):
-                        status += 0.000001;
+                        status += (double)0.000001;
                         break;
                 }
                 if (msg.what != 999){
@@ -256,8 +257,15 @@ public class CheckActivity extends AppCompatActivity implements MidiDriver.OnMid
 
     }
 
-    public void Restart(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+    public void Restart(View view) throws InterruptedException {
+        population = population_backup;
+        Button b1 = findViewById(R.id.btnPlayMusic);
+        b1.setVisibility(View.GONE);
+        Button b2 = findViewById(R.id.GoBack);
+        b2.setVisibility(View.GONE);
+        Button b3 = findViewById(R.id.btnMakeMusic);
+        b3.setVisibility(View.VISIBLE);
+        status = 99.000001;
+        makeMusic(view);
     }
 }

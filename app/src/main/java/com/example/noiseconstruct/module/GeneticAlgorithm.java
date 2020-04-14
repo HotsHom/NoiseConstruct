@@ -100,13 +100,13 @@ public class GeneticAlgorithm {
             COUNT_DISS = 0;
             for (int j = 3; j < 60;){
                 int result = Math.abs(population[j][i] - population[j-3][i]);
-                if (result == 1){
+                if (result == 1 || result == 2){
                     COUNT_DISS += 1;
                 }
                 int result_two = 0;
                 int check = 13;
                 while(population[j][i] - check >= 36 || population[j][i] + check <= 78){
-                    if (Math.abs(population[j][i] - population[j-3][i]) == check){
+                    if (Math.abs(population[j][i] - population[j-3][i]) == check || Math.abs(population[j][i] - population[j-3][i]) == check+1 || Math.abs(population[j][i] - population[j-3][i]) == check-1){
                         COUNT_DISS += 1;
                     }
                     check *= 2;
@@ -179,7 +179,7 @@ public class GeneticAlgorithm {
         for (int i = 0; i < 100; i++){
             int COUNT_DIFFERENCE = 0;
             for (int j = 3; j < 60;){
-                if (Math.abs(population[j][i] - population[j-3][i]) > 8){
+                if (Math.abs(population[j][i] - population[j-3][i]) > 4){
                     COUNT_DIFFERENCE++;
                 }
                 j += 3;
@@ -285,7 +285,7 @@ public class GeneticAlgorithm {
         int cChild = 0;
         for (int i = 0; i < 50;){
             int flag = 0;
-            int y = (int) (random() * 6) + 1;
+            int y = (int) (random() * 7) + 1;
             for (int j = 0; j < 60; j++){
                 if (flag < y){
                     children[j][cChild] = parentPopulation[j][i];
@@ -344,7 +344,7 @@ public class GeneticAlgorithm {
                     }else{
                         countRandomMutation = (int) (random() * 50);
                         if (countRandomMutation > 30){
-                            int change = (int) (random()*20);
+                            int change = (int) (random()*10);
                             int y = (int) (random() * 30);
                             if (y > 27){
                                 change = -change;
@@ -352,7 +352,11 @@ public class GeneticAlgorithm {
                             if (AVERAGE + 20 > change + mutatedPopukation[j][i] && AVERAGE  < change + mutatedPopukation[j][i] && (j - 1) % 3 == 0){
                                 mutatedPopukation[j][i] += change;
                             }
-                            if((j - 2) % 3 == 0 && mutatedPopukation[j][i] + change < 800){
+                            y = (int) (random() * 30);
+                            if (y > 14){
+                                change = -change;
+                            }
+                            if((j - 2) % 3 == 0 && mutatedPopukation[j][i] + change < 900){
                                 mutatedPopukation[j][i] += change;
                             }
                             countMutated++;
@@ -390,7 +394,7 @@ public class GeneticAlgorithm {
                     if (AVERAGE + 20 > change + mutatedPopukation[j][i] && AVERAGE  < change + mutatedPopukation[j][i] && (j - 1) % 3 == 0){
                         mutatedPopukation[j][i] += change;
                     }
-                    if(j - 2 % 3 == 0 && mutatedPopukation[j][i] + change < 800){
+                    if(j - 2 % 3 == 0 && mutatedPopukation[j][i] + change < 900){
                         mutatedPopukation[j][i] += change;
                     }
                     if (AVERAGE  >= mutatedPopukation[j][i] && (j - 1) % 3 == 0){

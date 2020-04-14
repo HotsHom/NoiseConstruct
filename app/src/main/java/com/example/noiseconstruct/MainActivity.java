@@ -180,6 +180,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("data_Pitch", pitches);
         intent.putExtra("data_Amplitudes", amplitudes);
         startActivity(intent);
+        finish();
     }
 
     class RecordTask extends AsyncTask<Void, Void, Void> {
