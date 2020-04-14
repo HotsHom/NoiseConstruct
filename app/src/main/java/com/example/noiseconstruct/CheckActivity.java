@@ -5,6 +5,7 @@ import org.billthefarmer.mididriver.MidiDriver;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.media.midi.MidiDevice;
 import android.media.midi.MidiInputPort;
 import android.media.midi.MidiManager;
@@ -208,6 +209,8 @@ public class CheckActivity extends AppCompatActivity implements MidiDriver.OnMid
         for (int i = 0; i < 60; i += 3){
             playNote(successMelody[i], successMelody[i+1],successMelody[i+2]);
         }
+        Button restart = findViewById(R.id.GoBack);
+        restart.setVisibility(View.VISIBLE);
     }
 
     private void playNote(int note, int velocity, int time) {
@@ -251,5 +254,10 @@ public class CheckActivity extends AppCompatActivity implements MidiDriver.OnMid
     @Override
     public void onBackPressed() {
 
+    }
+
+    public void Restart(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }

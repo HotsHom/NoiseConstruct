@@ -68,6 +68,18 @@
             android:layout_marginTop="30dp"
             android:stateListAnimator="@null"
             android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/GoBack"
+            android:onClick="Restart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Попытаться ещё раз"
+            android:background="@drawable/background_button_white"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="30dp"
+            android:stateListAnimator="@null"
+            android:visibility="gone"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"/>

@@ -25,7 +25,7 @@ public class GeneticAlgorithm {
 
                 populations[j][i] = generateNote(pitches[countGeneratedIndividual]); //Нота
                 populations[j+1][i] = generatePower(amplitudes[countGeneratedIndividual]); //Громкость
-                populations[j+2][i] = (int) (150 + random()*800);
+                populations[j+2][i] = (int) (250 + random()*800);
 
                 countGeneratedIndividual++;
                 j += 3;
@@ -103,6 +103,14 @@ public class GeneticAlgorithm {
                 if (result == 1){
                     COUNT_DISS += 1;
                 }
+                int result_two = 0;
+                int check = 13;
+                while(population[j][i] - check >= 36 || population[j][i] + check <= 78){
+                    if (Math.abs(population[j][i] - population[j-3][i]) == check){
+                        COUNT_DISS += 1;
+                    }
+                    check *= 2;
+                }
                 j += 3;
             }
             RATING_DISSON = 20 - COUNT_DISS;
@@ -148,7 +156,7 @@ public class GeneticAlgorithm {
 //        for (int i = 0; i < 100; i++){
 //            int LOW_RITM = 0;
 //            for (int j = 2; j < 60;){
-//                if (population[j][i] < 500){
+//                if (population[j][i] < 250){
 //                    adaptability[1][i]--;
 //                }
 //                j += 3;
@@ -158,7 +166,7 @@ public class GeneticAlgorithm {
         for (int i = 0; i < 100; i++){
             int COUNT_LOW_HIGHT_NOTE = 0;
             for (int j = 0; j < 60;){
-                if (population[j][i] < 36 || population[j][i] > 83){
+                if (population[j][i] < 36 || population[j][i] > 78){
                     COUNT_LOW_HIGHT_NOTE++;
                 }
                 j += 3;
@@ -166,6 +174,17 @@ public class GeneticAlgorithm {
             if (COUNT_LOW_HIGHT_NOTE > 0){
                 adaptability[1][i] -= COUNT_LOW_HIGHT_NOTE;
             }
+        }
+
+        for (int i = 0; i < 100; i++){
+            int COUNT_DIFFERENCE = 0;
+            for (int j = 3; j < 60;){
+                if (Math.abs(population[j][i] - population[j-3][i]) > 8){
+                    COUNT_DIFFERENCE++;
+                }
+                j += 3;
+            }
+            adaptability[1][i] -= COUNT_DIFFERENCE;
         }
 
         return adaptability;
@@ -316,7 +335,7 @@ public class GeneticAlgorithm {
                                 change = -change;
                                 mutatedPopukation[j][i] += change;
                                 countMutated++;
-                            }else if(y > 50 && mutatedPopukation[j][i] + change <= 83){
+                            }else if(y > 50 && mutatedPopukation[j][i] + change <= 78){
                                 mutatedPopukation[j][i] += change;
                                 countMutated++;
                             }
@@ -357,14 +376,14 @@ public class GeneticAlgorithm {
                         if (mutatedPopukation[j][i] - change >= 36){
                             change = -change;
                             mutatedPopukation[j][i] += change;
-                        }else if(mutatedPopukation[j][i] + change <= 83){
+                        }else if(mutatedPopukation[j][i] + change <= 78){
                             mutatedPopukation[j][i] += change;
                         }
                     }else if(y > 50 && j % 3 == 0){
                         if (mutatedPopukation[j][i] - change >= 36){
                             change = -change;
                             mutatedPopukation[j][i] += change;
-                        }else if(mutatedPopukation[j][i] + change <= 83){
+                        }else if(mutatedPopukation[j][i] + change <= 78){
                             mutatedPopukation[j][i] += change;
                         }
                     }
