@@ -16,18 +16,18 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Оцените данные мелодии по шкале от 1 до 10"
+            android:text="Сейчас мы сгенерируем мелодию вашего окружения"
             android:textColor="#2B2A2A"
             android:textStyle="bold"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="30dp"
-            android:textSize="28sp"
+            android:textSize="26sp"
             android:layout_marginTop="20dp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Оценка данных отрывков позволит программе корректно сгенерировать мелодию вашего окружения"
+            android:text="Процесс может занять какое-то время, следите за обновлением состояния на экране. \nКогда будите готовы, нажмите на кнопку 'Начать'"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
@@ -35,304 +35,39 @@
             android:textColor="#464646"
             android:layout_marginBottom="10dp"/>
 
-        <LinearLayout
+
+        <TextView
+            android:id="@+id/tvStatus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:text="Выполнение: 0%"
+            android:layout_marginHorizontal="20dp"
+            android:gravity="center"
             android:layout_marginTop="20dp"
-            android:layout_marginHorizontal="20dp">
+            android:visibility="gone"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1."
-                android:textSize="25sp"
-                android:layout_marginRight="20dp"
-                android:layout_gravity="center"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Прослушать"
-                android:background="@drawable/background_button_white"
-                android:paddingHorizontal="50dp"/>
-
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:entries="@array/NumList"
-                android:layout_marginLeft="20dp"/>
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp"
-            android:layout_marginHorizontal="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2."
-                android:textSize="25sp"
-                android:layout_marginRight="20dp"
-                android:layout_gravity="center"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Прослушать"
-                android:background="@drawable/background_button_white"
-                android:paddingHorizontal="50dp"/>
-
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:entries="@array/NumList"
-                android:layout_marginLeft="20dp"/>
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp"
-            android:layout_marginHorizontal="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="3."
-                android:textSize="25sp"
-                android:layout_marginRight="20dp"
-                android:layout_gravity="center"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Прослушать"
-                android:background="@drawable/background_button_white"
-                android:paddingHorizontal="50dp"/>
-
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:entries="@array/NumList"
-                android:layout_marginLeft="20dp"/>
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp"
-            android:layout_marginHorizontal="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="4."
-                android:textSize="25sp"
-                android:layout_marginRight="20dp"
-                android:layout_gravity="center"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Прослушать"
-                android:background="@drawable/background_button_white"
-                android:paddingHorizontal="50dp"/>
-
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:entries="@array/NumList"
-                android:layout_marginLeft="20dp"/>
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp"
-            android:layout_marginHorizontal="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="5."
-                android:textSize="25sp"
-                android:layout_marginRight="20dp"
-                android:layout_gravity="center"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Прослушать"
-                android:background="@drawable/background_button_white"
-                android:paddingHorizontal="50dp"/>
-
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:entries="@array/NumList"
-                android:layout_marginLeft="20dp"/>
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp"
-            android:layout_marginHorizontal="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="6."
-                android:textSize="25sp"
-                android:layout_marginRight="20dp"
-                android:layout_gravity="center"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Прослушать"
-                android:background="@drawable/background_button_white"
-                android:paddingHorizontal="50dp"/>
-
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:entries="@array/NumList"
-                android:layout_marginLeft="20dp"/>
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp"
-            android:layout_marginHorizontal="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="7."
-                android:textSize="25sp"
-                android:layout_marginRight="20dp"
-                android:layout_gravity="center"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Прослушать"
-                android:background="@drawable/background_button_white"
-                android:paddingHorizontal="50dp"/>
-
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:entries="@array/NumList"
-                android:layout_marginLeft="20dp"/>
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp"
-            android:layout_marginHorizontal="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="8."
-                android:textSize="25sp"
-                android:layout_marginRight="20dp"
-                android:layout_gravity="center"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Прослушать"
-                android:background="@drawable/background_button_white"
-                android:paddingHorizontal="50dp"/>
-
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:entries="@array/NumList"
-                android:layout_marginLeft="20dp"/>
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp"
-            android:layout_marginHorizontal="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="9."
-                android:textSize="25sp"
-                android:layout_marginRight="20dp"
-                android:layout_gravity="center"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Прослушать"
-                android:background="@drawable/background_button_white"
-                android:paddingHorizontal="50dp"/>
-
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:entries="@array/NumList"
-                android:layout_marginLeft="20dp"/>
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp"
-            android:layout_marginHorizontal="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="10."
-                android:textSize="25sp"
-                android:layout_marginRight="8dp"
-                android:layout_gravity="center"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Прослушать"
-                android:background="@drawable/background_button_white"
-                android:paddingHorizontal="50dp"/>
-
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:entries="@array/NumList"
-                android:layout_marginLeft="20dp"/>
-
-        </LinearLayout>
 
         <Button
+            android:id="@+id/btnMakeMusic"
+            android:onClick="makeMusic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Далее"
+            android:text="Начать"
             android:background="@drawable/background_button_white"
             android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="30dp"/>
+            android:layout_marginTop="30dp"
+            android:stateListAnimator="@null"/>
+        <Button
+            android:id="@+id/btnPlayMusic"
+            android:onClick="playMusic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Прослушать"
+            android:background="@drawable/background_button_white"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="30dp"
+            android:stateListAnimator="@null"
+            android:visibility="gone"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"/>
