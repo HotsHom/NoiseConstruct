@@ -8,6 +8,7 @@ public class GeneticAlgorithm {
     private Float[] pitches;
     private Integer[] amplitudes;
     private int AVERAGE = 0;
+    private int[] DURATION_ARRAY = new int[100];
 
     public GeneticAlgorithm(Float[] _pitches, Integer[] _amplitudes){
         pitches = _pitches;
@@ -166,7 +167,7 @@ public class GeneticAlgorithm {
         for (int i = 0; i < 100; i++){
             int COUNT_LOW_HIGHT_NOTE = 0;
             for (int j = 0; j < 60;){
-                if (population[j][i] < 36 || population[j][i] > 78){
+                if (population[j][i] < 60 || population[j][i] > 78){
                     COUNT_LOW_HIGHT_NOTE++;
                 }
                 j += 3;
@@ -185,6 +186,20 @@ public class GeneticAlgorithm {
                 j += 3;
             }
             adaptability[1][i] -= COUNT_DIFFERENCE;
+        }
+
+        int count = 0;
+        for (int i = 0; i < 100; i++){
+            int COUNT_DURATION = 0;
+            for (int j = 2; j < 60;){
+                    COUNT_DURATION += population[j][i];
+                j += 3;
+            }
+            if (COUNT_DURATION > 9000 || COUNT_DURATION < 5500){
+                adaptability[1][i] -= 10;
+            }
+            DURATION_ARRAY[count] = COUNT_DURATION;
+            count++;
         }
 
         return adaptability;
@@ -353,11 +368,11 @@ public class GeneticAlgorithm {
                                 mutatedPopukation[j][i] += change;
                             }
                             y = (int) (random() * 30);
-                            if (y > 14){
-                                change = -change;
+                            if((j - 2) % 3 == 0 && mutatedPopukation[j][i] + change < 250 && y > 15){
+                                mutatedPopukation[j][i] += Math.abs(change);
                             }
-                            if((j - 2) % 3 == 0 && mutatedPopukation[j][i] + change < 900){
-                                mutatedPopukation[j][i] += change;
+                            if((j - 2) % 3 == 0 && mutatedPopukation[j][i] + change > 800 && y > 15){
+                                mutatedPopukation[j][i] -=  Math.abs(change);
                             }
                             countMutated++;
                         }
@@ -394,8 +409,11 @@ public class GeneticAlgorithm {
                     if (AVERAGE + 20 > change + mutatedPopukation[j][i] && AVERAGE  < change + mutatedPopukation[j][i] && (j - 1) % 3 == 0){
                         mutatedPopukation[j][i] += change;
                     }
-                    if(j - 2 % 3 == 0 && mutatedPopukation[j][i] + change < 900){
-                        mutatedPopukation[j][i] += change;
+                    if((j - 2) % 3 == 0 && DURATION_ARRAY[i] < 5500){
+                        mutatedPopukation[j][i] += Math.abs(change);
+                    }
+                    if((j - 2) % 3 == 0 && DURATION_ARRAY[i] > 9000){
+                        mutatedPopukation[j][i] -= Math.abs(change);
                     }
                     if (AVERAGE  >= mutatedPopukation[j][i] && (j - 1) % 3 == 0){
                         change = (int) (random() * 30);
