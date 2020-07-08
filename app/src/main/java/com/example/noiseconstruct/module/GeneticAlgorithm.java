@@ -22,18 +22,48 @@ public class GeneticAlgorithm {
 
         for (int i = 0; i < 100; i++){
             countGeneratedIndividual = 0;
+            int DURATION = 0;
             for (int j = 0; j < 60; ){
 
+                int summDuration = 20000;
                 populations[j][i] = generateNote(pitches[countGeneratedIndividual]); //Нота
                 populations[j+1][i] = generatePower(amplitudes[countGeneratedIndividual]); //Громкость
-                populations[j+2][i] = (int) (250 + random()*800);
+                populations[j+2][i] = generateDuration();
+                DURATION += populations[j+2][i];
 
                 countGeneratedIndividual++;
                 j += 3;
             }
+            //евклидов
+            int[] ArrayDuration = generateEvcklid(20, (int)DURATION/250);
+            for (int j = 2; j < 60; ) {
+                DURATION += populations[j][i];
+                j += 3;
+            }
+
         }
         getAverage(populations);
         return populations;
+    }
+
+    private int[] generateEvcklid(int i, int duration) {
+        int[] durrations = new int[duration];
+
+        String binar = "";
+        int ost = -1;
+        while(ost != 0){
+            ost = duration % i;
+        }
+
+        return durrations;
+    }
+
+    private int generateDuration(){
+        int duration = 1;
+        while (duration % 250 != 0) {
+            duration = (int) (random() * 2000 + 1);
+        }
+        return duration;
     }
 
     private int generatePower(int amplitude) {
@@ -201,6 +231,7 @@ public class GeneticAlgorithm {
             DURATION_ARRAY[count] = COUNT_DURATION;
             count++;
         }
+
 
         return adaptability;
     }
